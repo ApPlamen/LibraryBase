@@ -5,17 +5,26 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Rents")
 public class Rent {
 	
 	@Id
 	@GeneratedValue
 	private int id;
-	private int user;
-	private int book;
 	private Date fromDate;
 	private Date toDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "userId", referencedColumnName = "id")
+	private User user;
+	@ManyToOne
+	@JoinColumn(name = "bookId", referencedColumnName = "id")
+	private Book book;
 
 	public Rent() {
 	}
@@ -26,22 +35,6 @@ public class Rent {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getUser() {
-		return user;
-	}
-
-	public void setUser(int user) {
-		this.user = user;
-	}
-
-	public int getBook() {
-		return book;
-	}
-
-	public void setBook(int book) {
-		this.book = book;
 	}
 
 	public Date getFromDate() {
@@ -58,5 +51,21 @@ public class Rent {
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
 }
