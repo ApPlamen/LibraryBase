@@ -9,7 +9,7 @@ import com.tusofia.LibraryBase.infrastructure.Repository;
 public class CRUDSrevice<Entity, EntityId> {
 	
 	@Autowired
-	private Repository<Entity, EntityId> repo;
+	protected Repository<Entity, EntityId> repo;
 
 	public CRUDSrevice() {
 	}
