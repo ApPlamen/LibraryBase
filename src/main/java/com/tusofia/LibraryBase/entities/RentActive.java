@@ -4,9 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RentsArchive")
-public class RentArchive extends Rent {
-	
-	public RentArchive() {
+@Table(name = "Rents")
+public class RentActive extends Rent {
+
+	public RentActive() {
 	}
+
 }
