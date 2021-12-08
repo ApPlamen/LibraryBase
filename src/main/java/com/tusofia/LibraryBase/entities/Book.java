@@ -19,6 +19,7 @@ public class Book {
 	private String name;
 	private String author;
 	private Date published;
+	
 	@OneToOne
 	@JoinColumn(name = "id", referencedColumnName = "bookId")
 	private BookReserved bookReserved;

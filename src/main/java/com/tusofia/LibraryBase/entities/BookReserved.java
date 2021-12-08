@@ -15,6 +15,7 @@ public class BookReserved {
 	@Id
 	@GeneratedValue
 	private int id;
+	
 	@OneToOne
 	@JoinColumn(name = "bookId", referencedColumnName = "id")
 	private Book book;
