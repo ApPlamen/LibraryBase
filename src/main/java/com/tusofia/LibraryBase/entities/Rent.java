@@ -2,15 +2,13 @@ package com.tusofia.LibraryBase.entities;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Table(name = "Rents")
+@MappedSuperclass
 public class Rent {
 	
 	@Id
