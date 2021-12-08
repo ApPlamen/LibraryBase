@@ -2,17 +2,15 @@ package com.tusofia.LibraryBase.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.tusofia.LibraryBase.exceptions.RepoSaveException;
-import com.tusofia.LibraryBase.infrastructure.Repository;
+import com.tusofia.LibraryBase.infrastructure.Repo;
 
-public class CRUDSrevice<Entity, EntityId> {
+public class CRUDService<Entity, EntityId> {
 	
-	@Autowired
-	protected Repository<Entity, EntityId> repo;
-
-	public CRUDSrevice() {
+	protected Repo<Entity, EntityId> repo;
+	
+	public CRUDService(Repo<Entity, EntityId> repo) {
+		this.repo = repo;
 	}
 	
 	public Entity getById(EntityId entityId) {
