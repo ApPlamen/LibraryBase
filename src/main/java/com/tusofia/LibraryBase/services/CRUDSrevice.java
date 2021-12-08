@@ -18,12 +18,12 @@ public class CRUDSrevice<Entity, EntityId> {
 		return this.repo.getById(entityId);
 	}
 	
-	public List<Entity> getAll(EntityId entityId) {
+	public List<Entity> getAll() {
 		return this.repo.findAll();
 	}
 	
-	public void save(Entity entity) {
-		this.repo.save(entity);
+	public Entity save(Entity entity) {
+		return this.repo.save(entity);
 	}
 	
 	public void delete(Entity entity) {
