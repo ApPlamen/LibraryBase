@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,10 +18,11 @@ public class BookReserved {
 	private int id;
 	
 	@OneToOne
-	@JoinColumn(name = "bookId", referencedColumnName = "id")
+	@MapsId
+	@JoinColumn(name = "bookId")
 	private Book book;
 	@ManyToOne
-	@JoinColumn(name = "userId", referencedColumnName = "id")
+	@JoinColumn(name = "userId")
 	private User user;
 
 	public BookReserved() {

@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.MapsId;
 
 @MappedSuperclass
 public class Rent {
@@ -18,11 +19,8 @@ public class Rent {
 	private Date toDate;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId", referencedColumnName = "id")
+	@JoinColumn(name = "userId")
 	private User user;
-	@ManyToOne
-	@JoinColumn(name = "bookId", referencedColumnName = "id")
-	private Book book;
 
 	public Rent() {
 	}
@@ -57,13 +55,5 @@ public class Rent {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Book getBook() {
-		return book;
-	}
-
-	public void setBook(Book book) {
-		this.book = book;
 	}
 }
