@@ -6,6 +6,7 @@ import com.tusofia.LibraryBase.entities.BookReserved;
 import com.tusofia.LibraryBase.entities.Rent;
 import com.tusofia.LibraryBase.entities.RentActive;
 import com.tusofia.LibraryBase.entities.RentArchive;
+import com.tusofia.LibraryBase.exceptions.RepoSaveException;
 
 public class RentService extends CRUDSrevice<RentActive, Integer> {
 	
@@ -18,7 +19,7 @@ public class RentService extends CRUDSrevice<RentActive, Integer> {
 	}
 	
 	@Override
-	public RentActive save(RentActive entity) {
+	public RentActive save(RentActive entity) throws RepoSaveException {
 		if(entity.getId() != 0) {
 			return this.repo.save(entity);
 		}
@@ -29,8 +30,7 @@ public class RentService extends CRUDSrevice<RentActive, Integer> {
 		bookReserved = this.bookReservedService.save(bookReserved);
 		
 		if(bookReserved.getId() == 0) {
-			return null;
-			//throw new Exception();
+			throw new RepoSaveException("This book is booked by another user");
 		}
 		
 		entity = this.repo.save(entity);
@@ -42,8 +42,12 @@ public class RentService extends CRUDSrevice<RentActive, Integer> {
 	public void deleteById(Integer id) {
 		Rent rent = this.repo.getById(id);
 		
-		this.rentArchiveService.save((RentArchive) rent);
-		this.repo.deleteById(id);
+		try {
+			this.rentArchiveService.save((RentArchive) rent);
+			this.repo.deleteById(id);
+		} catch (RepoSaveException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

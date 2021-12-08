@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.tusofia.LibraryBase.exceptions.RepoSaveException;
 import com.tusofia.LibraryBase.infrastructure.Repository;
 
 public class CRUDSrevice<Entity, EntityId> {
@@ -22,7 +23,7 @@ public class CRUDSrevice<Entity, EntityId> {
 		return this.repo.findAll();
 	}
 	
-	public Entity save(Entity entity) {
+	public Entity save(Entity entity) throws RepoSaveException {
 		return this.repo.save(entity);
 	}
 	
