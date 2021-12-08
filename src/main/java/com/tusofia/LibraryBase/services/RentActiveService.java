@@ -1,21 +1,26 @@
 package com.tusofia.LibraryBase.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.tusofia.LibraryBase.entities.BookReserved;
 import com.tusofia.LibraryBase.entities.Rent;
 import com.tusofia.LibraryBase.entities.RentActive;
 import com.tusofia.LibraryBase.entities.RentArchive;
 import com.tusofia.LibraryBase.exceptions.RepoSaveException;
+import com.tusofia.LibraryBase.infrastructure.RentActiveRepo;
 
-public class RentService extends CRUDSrevice<RentActive, Integer> {
+@Service
+public class RentActiveService extends CRUDService<RentActive, Integer> {
 	
 	@Autowired
 	private RentArchiveService rentArchiveService;
 	@Autowired
 	private BookReservedService bookReservedService;
 
-	public RentService() {
+	@Autowired
+	public RentActiveService(RentActiveRepo repo) {
+		super(repo);
 	}
 	
 	@Override
