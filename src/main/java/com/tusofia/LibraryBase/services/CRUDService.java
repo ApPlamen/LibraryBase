@@ -1,6 +1,7 @@
 package com.tusofia.LibraryBase.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.tusofia.LibraryBase.exceptions.RepoSaveException;
 import com.tusofia.LibraryBase.infrastructure.Repo;
@@ -13,8 +14,8 @@ public class CRUDService<Entity, EntityId> {
 		this.repo = repo;
 	}
 	
-	public Entity getById(EntityId entityId) {
-		return this.repo.getById(entityId);
+	public Optional<Entity> getById(EntityId entityId) {
+		return this.repo.findById(entityId);
 	}
 	
 	public List<Entity> getAll() {
