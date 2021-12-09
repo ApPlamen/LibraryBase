@@ -47,8 +47,7 @@ public class RentActiveService extends CRUDService<RentActive, Integer> {
 		return entity;
 	}
 	
-	@Override
-	public void deleteById(Integer id) {
+	public void returnBook(Integer id) {
 		Rent rent = this.repo.getById(id);
 		
 		this.rentArchiveService.save((RentArchive) rent);
