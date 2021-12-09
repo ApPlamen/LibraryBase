@@ -24,7 +24,7 @@ public class RentActiveService extends CRUDService<RentActive, Integer> {
 	}
 	
 	@Override
-	public RentActive save(RentActive entity) throws RepoSaveException {
+	public RentActive save(RentActive entity) {
 		if(entity.getId() != 0) {
 			return this.repo.save(entity);
 		}
@@ -47,12 +47,8 @@ public class RentActiveService extends CRUDService<RentActive, Integer> {
 	public void deleteById(Integer id) {
 		Rent rent = this.repo.getById(id);
 		
-		try {
-			this.rentArchiveService.save((RentArchive) rent);
-			this.repo.deleteById(id);
-		} catch (RepoSaveException e) {
-			e.printStackTrace();
-		}
+		this.rentArchiveService.save((RentArchive) rent);
+		this.repo.deleteById(id);
 	}
 
 }
