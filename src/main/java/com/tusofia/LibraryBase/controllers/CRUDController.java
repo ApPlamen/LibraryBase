@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.tusofia.LibraryBase.exceptions.RepoSaveException;
 import com.tusofia.LibraryBase.services.CRUDService;
 
 public class CRUDController<Entity, EntityId> {
@@ -34,12 +33,12 @@ public class CRUDController<Entity, EntityId> {
 	}
 	
 	@PostMapping("create")
-	public Entity create(@RequestBody Entity entity) throws RepoSaveException {
+	public Entity create(@RequestBody Entity entity) {
 		return this.service.save(entity);
 	}
 	
 	@PutMapping("update")
-	public Entity update(@RequestBody Entity entity) throws RepoSaveException {
+	public Entity update(@RequestBody Entity entity) {
 		return this.service.save(entity);
 	}
 	

@@ -3,7 +3,6 @@ package com.tusofia.LibraryBase.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.tusofia.LibraryBase.exceptions.RepoSaveException;
 import com.tusofia.LibraryBase.infrastructure.Repo;
 
 public class CRUDService<Entity, EntityId> {
@@ -22,7 +21,7 @@ public class CRUDService<Entity, EntityId> {
 		return this.repo.findAll();
 	}
 	
-	public Entity save(Entity entity) throws RepoSaveException {
+	public Entity save(Entity entity) {
 		return this.repo.save(entity);
 	}
 	
