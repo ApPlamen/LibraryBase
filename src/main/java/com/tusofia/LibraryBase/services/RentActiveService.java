@@ -2,6 +2,7 @@ package com.tusofia.LibraryBase.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tusofia.LibraryBase.entities.BookReserved;
 import com.tusofia.LibraryBase.entities.Rent;
@@ -35,20 +36,33 @@ public class RentActiveService extends CRUDService<RentActive, Integer> {
 		bookReserved = this.bookReservedService.save(bookReserved);
 		
 		if(bookReserved.getId() == 0) {
+			bookReserved = this.bookReservedService.findByBookIdAndUserId(entity.getBook().getId(), entity.getUser().getId());
+		}
+		
+		if(bookReserved.getId() == 0) {
 			throw new RepoSaveException("This book is booked by another user");
 		}
 		
+		return this.repoSaveTransactional(entity, bookReserved);
+	}
+	
+	@Transactional
+	private RentActive repoSaveTransactional(RentActive entity, BookReserved bookReserved) {
 		entity = this.repo.save(entity);
 		this.bookReservedService.delete(bookReserved);
 		return entity;
 	}
 	
-	@Override
-	public void deleteById(Integer id) {
+	public void returnBook(Integer id) {
 		Rent rent = this.repo.getById(id);
 		
-		this.rentArchiveService.save((RentArchive) rent);
-		this.repo.deleteById(id);
+		this.repoReturnBookTransactional(id, (RentArchive) rent);
 	}
 
+	@Transactional
+	private void repoReturnBookTransactional(Integer bookId, RentArchive rentArchive) {
+		this.rentArchiveService.save(rentArchive);
+		this.repo.deleteById(bookId);
+	}
+	
 }
