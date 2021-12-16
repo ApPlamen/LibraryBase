@@ -4,8 +4,6 @@ import java.sql.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
@@ -16,10 +14,7 @@ public class Rent {
 	private int id;
 	private Date fromDate;
 	private Date toDate;
-	
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private User user;
+	private int userId;
 
 	public Rent() {
 	}
@@ -48,11 +43,12 @@ public class Rent {
 		this.toDate = toDate;
 	}
 
-	public User getUser() {
-		return user;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
+
 }
