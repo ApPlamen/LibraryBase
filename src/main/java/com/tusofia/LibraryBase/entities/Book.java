@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Books")
-public class Book {
+public class Book implements EntityModel {
 	
 	@Id
 	@GeneratedValue

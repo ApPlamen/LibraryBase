@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tusofia.LibraryBase.dtos.inputs.RentActiveInputDTO;
+import com.tusofia.LibraryBase.dtos.inputs.RentActiveUpdateDTO;
 import com.tusofia.LibraryBase.entities.RentActive;
 import com.tusofia.LibraryBase.services.RentActiveService;
 
 @RestController
 @RequestMapping("api/rent-active")
-public class RentActiveController extends CRUDController<RentActive, Integer> {
+public class RentActiveController extends CRUDController<RentActive, Integer, RentActiveInputDTO, RentActiveUpdateDTO> {
 
 	private RentActiveService service;
 	

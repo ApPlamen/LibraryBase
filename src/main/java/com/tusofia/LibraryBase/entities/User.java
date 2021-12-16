@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements EntityModel {
 	
 	@Id
 	@GeneratedValue

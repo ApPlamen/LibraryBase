@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.tusofia.LibraryBase.dtos.inputs.InputDTO;
+import com.tusofia.LibraryBase.dtos.inputs.UpdateDTO;
+import com.tusofia.LibraryBase.entities.EntityModel;
 import com.tusofia.LibraryBase.services.CRUDService;
 
-public class CRUDController<Entity, EntityId> {
+public class CRUDController<Entity extends EntityModel, EntityId, CreateEntityDTO extends InputDTO<Entity, EntityId>, UpdateEntityDTO extends UpdateDTO<Entity, EntityId>> {
 
 	@Autowired
 	protected CRUDService<Entity, EntityId> service;
@@ -33,17 +36,17 @@ public class CRUDController<Entity, EntityId> {
 	}
 	
 	@PostMapping("create")
-	public Entity create(@RequestBody Entity entity) {
+	public Entity create(@RequestBody CreateEntityDTO entity) {
 		return this.service.save(entity);
 	}
 	
 	@PutMapping("update")
-	public Entity update(@RequestBody Entity entity) {
+	public Entity update(@RequestBody UpdateEntityDTO entity) {
 		return this.service.save(entity);
 	}
 	
 	@DeleteMapping("delete")
-	public void delete(@RequestBody Entity entity) {
+	public void delete(@RequestBody UpdateEntityDTO entity) {
 		this.service.delete(entity);
 	}
 	

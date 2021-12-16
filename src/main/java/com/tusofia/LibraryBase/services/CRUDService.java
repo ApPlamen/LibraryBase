@@ -3,9 +3,11 @@ package com.tusofia.LibraryBase.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.tusofia.LibraryBase.dtos.inputs.InputDTO;
+import com.tusofia.LibraryBase.entities.EntityModel;
 import com.tusofia.LibraryBase.infrastructure.Repo;
 
-public class CRUDService<Entity, EntityId> {
+public class CRUDService<Entity extends EntityModel, EntityId> {
 	
 	protected Repo<Entity, EntityId> repo;
 	
@@ -21,12 +23,12 @@ public class CRUDService<Entity, EntityId> {
 		return this.repo.findAll();
 	}
 	
-	public Entity save(Entity entity) {
-		return this.repo.save(entity);
+	public Entity save(InputDTO<Entity, EntityId> entity) {
+		return this.repo.save(entity.toEntity());
 	}
 	
-	public void delete(Entity entity) {
-		this.repo.delete(entity);
+	public void delete(InputDTO<Entity, EntityId> entity) {
+		this.repo.delete(entity.toEntity());
 	}
 	
 	public void deleteById(EntityId entityId) {

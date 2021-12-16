@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "BookReservations")
-public class BookReserved {
+public class BookReserved implements EntityModel {
 
 	@Id
 	private int bookId;
