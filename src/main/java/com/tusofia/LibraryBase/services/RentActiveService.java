@@ -31,15 +31,15 @@ public class RentActiveService extends CRUDService<RentActive, Integer> {
 		}
 		
 		BookReserved bookReserved = new BookReserved();
-		bookReserved.setBook(entity.getBook());
-		bookReserved.setUser(entity.getUser());
+		bookReserved.setBookId(entity.getBookId());
+		bookReserved.setUserId(entity.getUserId());
 		bookReserved = this.bookReservedService.save(bookReserved);
 		
-		if(bookReserved.getId() == 0) {
-			bookReserved = this.bookReservedService.findByBookIdAndUserId(entity.getBook().getId(), entity.getUser().getId());
+		if(bookReserved.getBookId() == 0) {
+			bookReserved = this.bookReservedService.findByBookIdAndUserId(entity.getBookId(), entity.getUserId());
 		}
 		
-		if(bookReserved.getId() == 0) {
+		if(bookReserved.getBookId() == 0) {
 			throw new RepoSaveException("This book is booked by another user");
 		}
 		

@@ -14,7 +14,7 @@ public class RentActive extends Rent {
 	@MapsId
 	@JoinColumn(name = "bookId")
 	private Book book;
-
+	
 	public RentActive() {
 	}
 	
@@ -25,4 +25,9 @@ public class RentActive extends Rent {
 	public void setBook(Book book) {
 		this.book = book;
 	}
+	
+	public int getBookId() {
+		return book.getId();
+	}
+	
 }
