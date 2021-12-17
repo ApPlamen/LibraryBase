@@ -38,24 +38,6 @@ public class DomainExceptionHandler {
                 .status(status)
                 .body(errorResponse);
     }
-    
-    @ExceptionHandler(RepoSaveException.class)
-    public ResponseEntity<GenericErrorResponse> handleRepoSaveExceptions(WebExchangeBindException exc, ServerWebExchange exchange) {
-        LOGGER.error(exc.getMessage());
-
-        HttpStatus status = HttpStatus.LOCKED;
-
-        GenericErrorResponse errorResponse = GenericErrorResponse.builder()
-                .message(getValidationErrorMessages(exc))
-                .status(status)
-                .path(exchange.getRequest().getPath().value())
-                .timestamp(OffsetDateTime.now())
-                .build();
-
-        return ResponseEntity
-                .status(status)
-                .body(errorResponse);
-    }
 
     private String getValidationErrorMessages(WebExchangeBindException exc) {
         return exc.getBindingResult()

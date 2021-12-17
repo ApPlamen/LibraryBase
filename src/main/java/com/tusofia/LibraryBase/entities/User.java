@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements EntityModel {
 	
 	@Id
 	@GeneratedValue
@@ -20,10 +20,6 @@ public class User {
 	private String userName;
 	private String password;
 	private boolean active;
-	
-	@OneToMany(targetEntity=BookReserved.class, orphanRemoval=true, cascade=CascadeType.ALL)
-	@JoinColumn(name="userId", referencedColumnName="id")
-	private List<BookReserved> booksReserved;
 	
 	@OneToMany(targetEntity=RentActive.class, orphanRemoval=true, cascade=CascadeType.ALL)
 	@JoinColumn(name="userId", referencedColumnName="id")
@@ -66,14 +62,6 @@ public class User {
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	public List<BookReserved> getBooksReserved() {
-		return booksReserved;
-	}
-
-	public void setBooksReserved(List<BookReserved> booksReserved) {
-		this.booksReserved = booksReserved;
 	}
 
 	public List<RentActive> getRentsActive() {

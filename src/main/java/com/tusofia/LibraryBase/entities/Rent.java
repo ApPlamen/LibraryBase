@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class Rent {
+public class Rent implements EntityModel {
 	
 	@Id
 	@GeneratedValue

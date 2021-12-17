@@ -4,20 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tusofia.LibraryBase.entities.BookReserved;
-import com.tusofia.LibraryBase.entities.Rent;
+import com.tusofia.LibraryBase.dtos.inputs.RentActiveInputDTO;
+import com.tusofia.LibraryBase.dtos.inputs.RentActiveUpdateDTO;
+import com.tusofia.LibraryBase.dtos.inputs.RentArchiveInputDTO;
+import com.tusofia.LibraryBase.entities.Book;
 import com.tusofia.LibraryBase.entities.RentActive;
-import com.tusofia.LibraryBase.entities.RentArchive;
-import com.tusofia.LibraryBase.exceptions.RepoSaveException;
+import com.tusofia.LibraryBase.infrastructure.BookRepo;
 import com.tusofia.LibraryBase.infrastructure.RentActiveRepo;
 
 @Service
-public class RentActiveService extends CRUDService<RentActive, Integer> {
+public class RentActiveService extends CRUDService<RentActive, Integer, RentActiveInputDTO, RentActiveUpdateDTO> {
 	
 	@Autowired
 	private RentArchiveService rentArchiveService;
+	
 	@Autowired
-	private BookReservedService bookReservedService;
+	private BookRepo bookRepo;
 
 	@Autowired
 	public RentActiveService(RentActiveRepo repo) {
@@ -25,43 +27,24 @@ public class RentActiveService extends CRUDService<RentActive, Integer> {
 	}
 	
 	@Override
-	public RentActive save(RentActive entity) {
-		if(entity.getId() != 0) {
-			return this.repo.save(entity);
-		}
+	public RentActive create(RentActiveInputDTO dto) {
+		RentActive entity = dto.toEntity();
+		Book book = this.bookRepo.findById(dto.getBookId()).get();
+		entity.setBook(book);
 		
-		BookReserved bookReserved = new BookReserved();
-		bookReserved.setBookId(entity.getBookId());
-		bookReserved.setUserId(entity.getUserId());
-		bookReserved = this.bookReservedService.save(bookReserved);
-		
-		if(bookReserved.getBookId() == 0) {
-			bookReserved = this.bookReservedService.findByBookIdAndUserId(entity.getBookId(), entity.getUserId());
-		}
-		
-		if(bookReserved.getBookId() == 0) {
-			throw new RepoSaveException("This book is booked by another user");
-		}
-		
-		return this.repoSaveTransactional(entity, bookReserved);
-	}
-	
-	@Transactional
-	private RentActive repoSaveTransactional(RentActive entity, BookReserved bookReserved) {
-		entity = this.repo.save(entity);
-		this.bookReservedService.delete(bookReserved);
-		return entity;
+		return this.repo.save(entity);
 	}
 	
 	public void returnBook(Integer id) {
-		Rent rent = this.repo.getById(id);
+		RentActive rent = this.repo.findById(id).get();
+		RentArchiveInputDTO rentArchiveDTO = RentArchiveInputDTO.fromRentActive(rent);
 		
-		this.repoReturnBookTransactional(id, (RentArchive) rent);
+		this.repoReturnBookTransactional(id, rentArchiveDTO);
 	}
 
 	@Transactional
-	private void repoReturnBookTransactional(Integer bookId, RentArchive rentArchive) {
-		this.rentArchiveService.save(rentArchive);
+	private void repoReturnBookTransactional(Integer bookId, RentArchiveInputDTO rentArchiveDTO) {
+		this.rentArchiveService.create(rentArchiveDTO);
 		this.repo.deleteById(bookId);
 	}
 	
