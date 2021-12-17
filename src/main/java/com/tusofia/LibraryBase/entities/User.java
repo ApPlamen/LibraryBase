@@ -21,10 +21,6 @@ public class User implements EntityModel {
 	private String password;
 	private boolean active;
 	
-	@OneToMany(targetEntity=BookReserved.class, orphanRemoval=true, cascade=CascadeType.ALL)
-	@JoinColumn(name="userId", referencedColumnName="id")
-	private List<BookReserved> booksReserved;
-	
 	@OneToMany(targetEntity=RentActive.class, orphanRemoval=true, cascade=CascadeType.ALL)
 	@JoinColumn(name="userId", referencedColumnName="id")
 	private List<RentActive> rentsActive;
@@ -66,14 +62,6 @@ public class User implements EntityModel {
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	public List<BookReserved> getBooksReserved() {
-		return booksReserved;
-	}
-
-	public void setBooksReserved(List<BookReserved> booksReserved) {
-		this.booksReserved = booksReserved;
 	}
 
 	public List<RentActive> getRentsActive() {

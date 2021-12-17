@@ -2,7 +2,7 @@ package com.tusofia.LibraryBase.dtos.inputs;
 
 import java.sql.Date;
 
-import com.tusofia.LibraryBase.entities.Rent;
+import com.tusofia.LibraryBase.entities.RentActive;
 import com.tusofia.LibraryBase.entities.RentArchive;
 
 public class RentArchiveInputDTO extends InputDTO<RentArchive> {
@@ -26,8 +26,14 @@ public class RentArchiveInputDTO extends InputDTO<RentArchive> {
 		return rentArchiveEntity;
 	}
 
-	public void fromRent(Rent rent) {
+	public static RentArchiveInputDTO fromRentActive(RentActive rent) {
+		RentArchiveInputDTO rentArchiveInputDTO = new RentArchiveInputDTO();
+		rentArchiveInputDTO.setUserId(rent.getUserId());
+		rentArchiveInputDTO.setBookId(rent.getBookId());
+		rentArchiveInputDTO.setFromDate(rent.getFromDate());
+		rentArchiveInputDTO.setToDate(rent.getToDate());
 		
+		return rentArchiveInputDTO;
 	}
 
 	public Date getFromDate() {
