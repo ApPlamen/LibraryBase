@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.tusofia.LibraryBase.dtos.inputs.InputDTO;
+import com.tusofia.LibraryBase.dtos.inputs.UpdateDTO;
 import com.tusofia.LibraryBase.entities.EntityModel;
 import com.tusofia.LibraryBase.infrastructure.Repo;
 
-public class CRUDService<Entity extends EntityModel, EntityId> {
+public class CRUDService<Entity extends EntityModel, EntityId, InputDTOImp extends InputDTO<Entity>, UpdateDTOImp extends UpdateDTO<Entity, EntityId>> {
 	
 	protected Repo<Entity, EntityId> repo;
 	
@@ -23,11 +24,15 @@ public class CRUDService<Entity extends EntityModel, EntityId> {
 		return this.repo.findAll();
 	}
 	
-	public Entity save(InputDTO<Entity, EntityId> entity) {
+	public Entity create(InputDTOImp entity) {
 		return this.repo.save(entity.toEntity());
 	}
 	
-	public void delete(InputDTO<Entity, EntityId> entity) {
+	public Entity update(UpdateDTOImp entity) {
+		return this.repo.save(entity.toEntity());
+	}
+	
+	public void delete(UpdateDTOImp entity) {
 		this.repo.delete(entity.toEntity());
 	}
 	

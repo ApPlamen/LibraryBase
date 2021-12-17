@@ -27,7 +27,7 @@ public class RentActive extends Rent {
 	}
 	
 	public int getBookId() {
-		return book.getId();
+		return this.book.getId();
 	}
 	
 }

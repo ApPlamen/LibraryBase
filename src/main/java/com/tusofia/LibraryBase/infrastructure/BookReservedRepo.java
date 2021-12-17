@@ -7,6 +7,6 @@ import com.tusofia.LibraryBase.entities.BookReserved;
 @Repository
 public interface BookReservedRepo extends Repo<BookReserved, Integer> {
 
-	BookReserved findByBookIdAndUserId(int bookId, int userId);
+	BookReserved findByIdAndUserId(int bookId, int userId);
 	
 }

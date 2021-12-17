@@ -16,12 +16,12 @@ import com.tusofia.LibraryBase.dtos.inputs.UpdateDTO;
 import com.tusofia.LibraryBase.entities.EntityModel;
 import com.tusofia.LibraryBase.services.CRUDService;
 
-public class CRUDController<Entity extends EntityModel, EntityId, CreateEntityDTO extends InputDTO<Entity, EntityId>, UpdateEntityDTO extends UpdateDTO<Entity, EntityId>> {
+public class CRUDController<Entity extends EntityModel, EntityId, InputDTOImp extends InputDTO<Entity>, UpdateDTOImp extends UpdateDTO<Entity, EntityId>> {
 
 	@Autowired
-	protected CRUDService<Entity, EntityId> service;
+	protected CRUDService<Entity, EntityId, InputDTOImp, UpdateDTOImp> service;
 	
-	public CRUDController(CRUDService<Entity, EntityId> service) {
+	public CRUDController(CRUDService<Entity, EntityId, InputDTOImp, UpdateDTOImp> service) {
 		this.service = service;
 	}
 	
@@ -36,17 +36,17 @@ public class CRUDController<Entity extends EntityModel, EntityId, CreateEntityDT
 	}
 	
 	@PostMapping("create")
-	public Entity create(@RequestBody CreateEntityDTO entity) {
-		return this.service.save(entity);
+	public Entity create(@RequestBody InputDTOImp entity) {
+		return this.service.create(entity);
 	}
 	
 	@PutMapping("update")
-	public Entity update(@RequestBody UpdateEntityDTO entity) {
-		return this.service.save(entity);
+	public Entity update(@RequestBody UpdateDTOImp entity) {
+		return this.service.update(entity);
 	}
 	
 	@DeleteMapping("delete")
-	public void delete(@RequestBody UpdateEntityDTO entity) {
+	public void delete(@RequestBody UpdateDTOImp entity) {
 		this.service.delete(entity);
 	}
 	

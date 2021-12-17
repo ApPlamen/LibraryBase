@@ -2,6 +2,9 @@ package com.tusofia.LibraryBase.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -9,18 +12,23 @@ import javax.persistence.Table;
 public class BookReserved implements EntityModel {
 
 	@Id
-	private int bookId;
+	private int id;
 	private int userId;
+	
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "bookId")
+	private Book book;
 
 	public BookReserved() {
 	}
 	
-	public int getBookId() {
-		return bookId;
+	public int getId() {
+		return id;
 	}
 
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getUserId() {
@@ -29,6 +37,18 @@ public class BookReserved implements EntityModel {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+	
+	public int getBookId() {
+		return this.book.getId();
 	}
 
 }
