@@ -45,11 +45,6 @@ public class CRUDController<Entity extends EntityModel, EntityId, InputDTOImp ex
 		return this.service.update(entity);
 	}
 	
-	@DeleteMapping("delete")
-	public void delete(@RequestBody UpdateDTOImp entity) {
-		this.service.delete(entity);
-	}
-	
 	@DeleteMapping("delete/{entityId}")
 	public void deleteById(@PathVariable EntityId entityId) {
 		this.service.deleteById(entityId);

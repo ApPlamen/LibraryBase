@@ -33,10 +33,6 @@ public class CRUDService<Entity extends EntityModel, EntityId, InputDTOImp exten
 		return this.repo.save(dto.toEntity(entity));
 	}
 	
-	public void delete(UpdateDTOImp entity) {
-		this.repo.delete(entity.toEntity());
-	}
-	
 	public void deleteById(EntityId entityId) {
 		this.repo.deleteById(entityId);
 	}
