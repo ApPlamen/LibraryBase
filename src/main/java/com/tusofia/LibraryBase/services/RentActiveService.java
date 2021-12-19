@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tusofia.LibraryBase.dtos.inputs.RentActiveInputDTO;
+import com.tusofia.LibraryBase.dtos.inputs.RentActiveRentDTO;
 import com.tusofia.LibraryBase.dtos.inputs.RentActiveUpdateDTO;
 import com.tusofia.LibraryBase.dtos.inputs.RentArchiveInputDTO;
 import com.tusofia.LibraryBase.entities.Book;
@@ -29,10 +30,16 @@ public class RentActiveService extends CRUDService<RentActive, Integer, RentActi
 	@Override
 	public RentActive create(RentActiveInputDTO dto) {
 		RentActive entity = dto.toEntity();
-		Book book = this.bookRepo.findById(dto.getBookId()).get();
-		entity.setBook(book);
-		
-		return this.repo.save(entity);
+		int bookId = dto.getBookId();
+
+		return this.rent(entity, bookId);
+	}
+	
+	public RentActive rentBook(RentActiveRentDTO dto) {
+		RentActive entity = dto.toEntity();
+		int bookId = dto.getBookId();
+
+		return this.rent(entity, bookId);
 	}
 	
 	public void returnBook(Integer id) {
@@ -40,6 +47,13 @@ public class RentActiveService extends CRUDService<RentActive, Integer, RentActi
 		RentArchiveInputDTO rentArchiveDTO = RentArchiveInputDTO.fromRentActive(rent);
 		
 		this.repoReturnBookTransactional(id, rentArchiveDTO);
+	}
+	
+	private RentActive rent(RentActive entity, int bookId) {
+		Book book = this.bookRepo.findById(bookId).get();
+		entity.setBook(book);
+		
+		return this.repo.save(entity);
 	}
 
 	@Transactional
