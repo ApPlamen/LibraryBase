@@ -36,13 +36,13 @@ public class CRUDController<Entity extends EntityModel, EntityId, InputDTOImp ex
 	}
 	
 	@PostMapping("create")
-	public Entity create(@RequestBody InputDTOImp entity) {
-		return this.service.create(entity);
+	public Entity create(@RequestBody InputDTOImp dto) {
+		return this.service.create(dto);
 	}
 	
 	@PutMapping("update")
-	public Entity update(@RequestBody UpdateDTOImp entity) {
-		return this.service.update(entity);
+	public Entity update(@RequestBody UpdateDTOImp dto) {
+		return this.service.update(dto);
 	}
 	
 	@DeleteMapping("delete/{entityId}")
