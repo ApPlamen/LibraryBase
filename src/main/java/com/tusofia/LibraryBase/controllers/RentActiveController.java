@@ -2,11 +2,13 @@ package com.tusofia.LibraryBase.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tusofia.LibraryBase.dtos.inputs.RentActiveInputDTO;
+import com.tusofia.LibraryBase.dtos.inputs.RentActiveRentDTO;
 import com.tusofia.LibraryBase.dtos.inputs.RentActiveUpdateDTO;
 import com.tusofia.LibraryBase.entities.RentActive;
 import com.tusofia.LibraryBase.services.RentActiveService;
@@ -21,6 +23,11 @@ public class RentActiveController extends CRUDController<RentActive, Integer, Re
 	public RentActiveController(RentActiveService service) {
 		super(service);
 		this.service = service;
+	}
+	
+	@PostMapping("rent-book")
+	public void returnBook(@RequestBody RentActiveRentDTO dto) {
+		this.service.rentBook(dto);
 	}
 	
 	@PostMapping("return-book/{entityId}")
