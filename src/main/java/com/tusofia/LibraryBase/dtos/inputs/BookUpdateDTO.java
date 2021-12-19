@@ -14,14 +14,13 @@ public class BookUpdateDTO extends UpdateDTO<Book, Integer> {
 	}
 
 	@Override
-	public Book toEntity() {
-		Book bookEntity = new Book();
-		bookEntity.setId(this.getId());
-		bookEntity.setName(this.getName());
-		bookEntity.setAuthor(this.getAuthor());
-		bookEntity.setPublished(this.getPublished());
+	public Book toEntity(Book entity) {
+		entity.setId(this.getId());
+		entity.setName(this.getName());
+		entity.setAuthor(this.getAuthor());
+		entity.setPublished(this.getPublished());
 		
-		return bookEntity;
+		return entity;
 	}
 
 	public String getName() {

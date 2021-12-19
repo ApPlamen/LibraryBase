@@ -15,14 +15,13 @@ public class RentActiveUpdateDTO extends UpdateDTO<RentActive, Integer> {
 	}
 
 	@Override
-	public RentActive toEntity() {
-		RentActive rentActiveEntity = new RentActive();
-		rentActiveEntity.setId(this.getId());
-		rentActiveEntity.setUserId(this.getUserId());
-		rentActiveEntity.setFromDate(this.getFromDate());
-		rentActiveEntity.setToDate(this.getToDate());
+	public RentActive toEntity(RentActive entity) {
+		entity.setId(this.getId());
+		entity.setUserId(this.getUserId());
+		entity.setFromDate(this.getFromDate());
+		entity.setToDate(this.getToDate());
 		
-		return rentActiveEntity;
+		return entity;
 	}
 
 	public Date getFromDate() {
