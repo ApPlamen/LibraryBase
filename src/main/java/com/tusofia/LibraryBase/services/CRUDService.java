@@ -24,16 +24,13 @@ public class CRUDService<Entity extends EntityModel, EntityId, InputDTOImp exten
 		return this.repo.findAll();
 	}
 	
-	public Entity create(InputDTOImp entity) {
-		return this.repo.save(entity.toEntity());
+	public Entity create(InputDTOImp dto) {
+		return this.repo.save(dto.toEntity());
 	}
 	
-	public Entity update(UpdateDTOImp entity) {
-		return this.repo.save(entity.toEntity());
-	}
-	
-	public void delete(UpdateDTOImp entity) {
-		this.repo.delete(entity.toEntity());
+	public Entity update(UpdateDTOImp dto) {
+		Entity entity = this.repo.findById(dto.getId()).get();
+		return this.repo.save(dto.toEntity(entity));
 	}
 	
 	public void deleteById(EntityId entityId) {

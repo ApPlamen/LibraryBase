@@ -12,14 +12,13 @@ public class UserUpdateDTO extends UpdateDTO<User, Integer> {
 	}
 
 	@Override
-	public User toEntity() {
-		User userEntity = new User();
-		userEntity.setId(this.getId());
-		userEntity.setUserName(this.getUserName());
-		userEntity.setPassword(this.getPassword());
-		userEntity.setActive(this.isActive());
+	public User toEntity(User entity) {
+		entity.setId(this.getId());
+		entity.setUserName(this.getUserName());
+		entity.setPassword(this.getPassword());
+		entity.setActive(this.isActive());
 		
-		return userEntity;
+		return entity;
 	}
 
 	public String getUserName() {

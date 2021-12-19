@@ -3,7 +3,7 @@ package com.tusofia.LibraryBase.dtos.inputs;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tusofia.LibraryBase.entities.EntityModel;
 
-public abstract class UpdateDTO<Entity extends EntityModel, EntityId> extends InputDTO<Entity> {
+public abstract class UpdateDTO<Entity extends EntityModel, EntityId> {
 
 	@JsonProperty
 	private EntityId id;
@@ -18,5 +18,7 @@ public abstract class UpdateDTO<Entity extends EntityModel, EntityId> extends In
 	public void setId(EntityId id) {
 		this.id = id;
 	}
+	
+	public abstract Entity toEntity(Entity entity);
 
 }
