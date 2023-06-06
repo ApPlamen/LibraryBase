@@ -1,5 +1,8 @@
 package com.tusofia.LibraryBase.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +15,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Users")
+@Getter
+@Setter
 public class User implements EntityModel {
 	
 	@Id
@@ -28,56 +33,5 @@ public class User implements EntityModel {
 	@OneToMany(targetEntity=RentArchive.class, orphanRemoval=true, cascade=CascadeType.ALL)
 	@JoinColumn(name="userId", referencedColumnName="id")
 	private List<RentArchive> rentsArchive;
-	
-	public User() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public List<RentActive> getRentsActive() {
-		return rentsActive;
-	}
-
-	public void setRentsActive(List<RentActive> rentsActive) {
-		this.rentsActive = rentsActive;
-	}
-
-	public List<RentArchive> getRentsArchive() {
-		return rentsArchive;
-	}
-
-	public void setRentsArchive(List<RentArchive> rentsArchive) {
-		this.rentsArchive = rentsArchive;
-	}
 	
 }
