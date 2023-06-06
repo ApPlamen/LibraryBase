@@ -3,16 +3,16 @@ package com.tusofia.LibraryBase.dtos.inputs;
 import java.sql.Date;
 
 import com.tusofia.LibraryBase.entities.RentActive;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class RentActiveRentDTO extends InputDTO<RentActive> {
 
 	private int userId;
 	private int bookId;
 
-	public RentActiveRentDTO() {
-	}
-
-	@SuppressWarnings("deprecation")
 	@Override
 	public RentActive toEntity() {
 		long millis = System.currentTimeMillis();
@@ -27,22 +27,6 @@ public class RentActiveRentDTO extends InputDTO<RentActive> {
 		rentActiveEntity.setToDate(dateTo);
 		
 		return rentActiveEntity;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
 	}
 
 }
