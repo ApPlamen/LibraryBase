@@ -3,16 +3,17 @@ package com.tusofia.LibraryBase.dtos.inputs;
 import java.sql.Date;
 
 import com.tusofia.LibraryBase.entities.RentActive;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class RentActiveInputDTO extends InputDTO<RentActive> {
 	
 	private Date fromDate;
 	private Date toDate;
 	private int userId;
 	private int bookId;
-
-	public RentActiveInputDTO() {
-	}
 
 	@Override
 	public RentActive toEntity() {
@@ -22,38 +23,6 @@ public class RentActiveInputDTO extends InputDTO<RentActive> {
 		rentActiveEntity.setToDate(this.getToDate());
 		
 		return rentActiveEntity;
-	}
-
-	public Date getFromDate() {
-		return fromDate;
-	}
-
-	public void setFromDate(Date fromDate) {
-		this.fromDate = fromDate;
-	}
-
-	public Date getToDate() {
-		return toDate;
-	}
-
-	public void setToDate(Date toDate) {
-		this.toDate = toDate;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
 	}
 
 }

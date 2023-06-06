@@ -1,14 +1,15 @@
 package com.tusofia.LibraryBase.dtos.inputs;
 
 import com.tusofia.LibraryBase.entities.User;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class UserInputDTO extends InputDTO<User> {
 	
 	private String userName;
 	private String password;
-
-	public UserInputDTO() {
-	}
 
 	@Override
 	public User toEntity() {
@@ -18,22 +19,6 @@ public class UserInputDTO extends InputDTO<User> {
 		userEntity.setActive(true);
 		
 		return userEntity;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 }
