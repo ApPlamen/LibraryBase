@@ -19,12 +19,12 @@ import com.tusofia.LibraryBase.infrastructure.BookRepo;
 @Service
 public class BookService extends CRUDService<Book, Integer, BookInputDTO, BookUpdateDTO> {
 	
-	@Autowired
 	private RentActiveService rentActiveService;
 	
 	@Autowired
-	public BookService(BookRepo repo) {
+	public BookService(BookRepo repo, RentActiveService rentActiveService) {
 		super(repo);
+		this.rentActiveService = rentActiveService;
 	}
 	
 	public List<Rent> getBookRents(int bookId) {

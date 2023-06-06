@@ -16,15 +16,14 @@ import com.tusofia.LibraryBase.infrastructure.RentActiveRepo;
 @Service
 public class RentActiveService extends CRUDService<RentActive, Integer, RentActiveInputDTO, RentActiveUpdateDTO> {
 	
-	@Autowired
 	private RentArchiveService rentArchiveService;
-	
-	@Autowired
 	private BookRepo bookRepo;
 
 	@Autowired
-	public RentActiveService(RentActiveRepo repo) {
+	public RentActiveService(RentActiveRepo repo, BookRepo bookRepo, RentArchiveService rentArchiveService) {
 		super(repo);
+		this.bookRepo = bookRepo;
+		this.rentArchiveService = rentArchiveService;
 	}
 	
 	@Override
