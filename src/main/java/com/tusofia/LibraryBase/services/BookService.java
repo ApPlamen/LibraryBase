@@ -18,8 +18,8 @@ import com.tusofia.LibraryBase.infrastructure.BookRepo;
 
 @Service
 public class BookService extends CRUDService<Book, Integer, BookInputDTO, BookUpdateDTO> {
-	
-	private RentActiveService rentActiveService;
+
+	private final RentActiveService rentActiveService;
 	
 	@Autowired
 	public BookService(BookRepo repo, RentActiveService rentActiveService) {

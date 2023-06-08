@@ -21,7 +21,7 @@ import com.tusofia.LibraryBase.services.BookService;
 @RequestMapping("api/book")
 public class BookController extends CRUDController<Book, Integer, BookInputDTO, BookUpdateDTO> {
 
-	private BookService service;
+	private final BookService service;
 	
 	@Autowired
 	public BookController(BookService service) {

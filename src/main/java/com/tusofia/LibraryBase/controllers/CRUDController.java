@@ -18,7 +18,7 @@ import com.tusofia.LibraryBase.services.CRUDService;
 
 public class CRUDController<Entity extends EntityModel, EntityId, InputDTOImp extends InputDTO<Entity>, UpdateDTOImp extends UpdateDTO<Entity, EntityId>> {
 
-	protected CRUDService<Entity, EntityId, InputDTOImp, UpdateDTOImp> service;
+	protected final CRUDService<Entity, EntityId, InputDTOImp, UpdateDTOImp> service;
 	
 	@Autowired
 	public CRUDController(CRUDService<Entity, EntityId, InputDTOImp, UpdateDTOImp> service) {

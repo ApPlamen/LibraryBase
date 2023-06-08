@@ -20,8 +20,8 @@ import com.tusofia.LibraryBase.services.UserService;
 @RequestMapping("api/user")
 public class UserController extends CRUDController<User, Integer, UserInputDTO, UserUpdateDTO> {
 
-	private UserService service;
-	
+	private final UserService service;
+
 	@Autowired
 	public UserController(UserService service) {
 		super(service);
