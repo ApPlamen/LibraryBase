@@ -5,7 +5,6 @@ import com.tusofia.LibraryBase.entities.Book;
 import com.tusofia.LibraryBase.services.BookService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -20,6 +19,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
 
 @WebMvcTest(BookController.class)
 public class BookControllerTests {
@@ -30,6 +32,8 @@ public class BookControllerTests {
     @MockBean
     private BookService mockBookService;
 
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     @Test
     @DisplayName("Get Should Return Book")
     public void getShouldReturnBook() throws Exception {
@@ -38,10 +42,9 @@ public class BookControllerTests {
         book.setId(bookId);
         Optional<Book> expected = Optional.of(book);
 
-        Mockito.when(mockBookService.getById(bookId))
+        when(mockBookService.getById(bookId))
                 .thenReturn(expected);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         String bookJson = objectMapper.writeValueAsString(expected.get());
 
         RequestBuilder request = MockMvcRequestBuilders
@@ -55,7 +58,7 @@ public class BookControllerTests {
         String content = result.getResponse().getContentAsString();
 
         assertEquals(bookJson, content);
-        Mockito.verify(mockBookService, Mockito.times(1)).getById(bookId);
+        verify(mockBookService, times(1)).getById(bookId);
     }
 
     @Test
@@ -69,10 +72,9 @@ public class BookControllerTests {
         expected.add(book1);
         expected.add(book2);
 
-        Mockito.when(mockBookService.getAll())
+        when(mockBookService.getAll())
                 .thenReturn(expected);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         String bookListJson = objectMapper.writeValueAsString(expected);
 
         RequestBuilder request = MockMvcRequestBuilders
@@ -86,6 +88,6 @@ public class BookControllerTests {
         String content = result.getResponse().getContentAsString();
 
         assertEquals(bookListJson, content);
-        Mockito.verify(mockBookService, Mockito.times(1)).getAll();
+        verify(mockBookService, times(1)).getAll();
     }
 }
