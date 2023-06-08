@@ -17,7 +17,7 @@ import com.tusofia.LibraryBase.entities.User;
 import com.tusofia.LibraryBase.services.UserService;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/users")
 public class UserController extends CRUDController<User, Integer, UserInputDTO, UserUpdateDTO> {
 
 	private final UserService service;
