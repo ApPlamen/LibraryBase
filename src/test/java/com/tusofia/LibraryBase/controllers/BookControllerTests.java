@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -40,7 +42,7 @@ public class BookControllerTests {
                 .thenReturn(expected);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String bookJson = objectMapper.writeValueAsString(book);
+        String bookJson = objectMapper.writeValueAsString(expected.get());
 
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/api/book/get/" + bookId)
@@ -53,5 +55,37 @@ public class BookControllerTests {
         String content = result.getResponse().getContentAsString();
 
         assertEquals(bookJson, content);
+        Mockito.verify(mockBookService, Mockito.times(1)).getById(bookId);
+    }
+
+    @Test
+    @DisplayName("Get All Should Return List Of Books")
+    public void getAllShouldReturnListOfBooks() throws Exception {
+        Book book1 = new Book();
+        book1.setId(1);
+        Book book2 = new Book();
+        book1.setId(2);
+        List<Book> expected = new ArrayList<>();
+        expected.add(book1);
+        expected.add(book2);
+
+        Mockito.when(mockBookService.getAll())
+                .thenReturn(expected);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String bookListJson = objectMapper.writeValueAsString(expected);
+
+        RequestBuilder request = MockMvcRequestBuilders
+                .get("/api/book/get-all")
+                .contentType("application/json");
+
+        MvcResult result = mockMvc.perform(request)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+
+        assertEquals(bookListJson, content);
+        Mockito.verify(mockBookService, Mockito.times(1)).getAll();
     }
 }
