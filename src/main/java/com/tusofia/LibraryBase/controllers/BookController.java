@@ -18,7 +18,7 @@ import com.tusofia.LibraryBase.entities.RentArchive;
 import com.tusofia.LibraryBase.services.BookService;
 
 @RestController
-@RequestMapping("api/book")
+@RequestMapping("api/books")
 public class BookController extends CRUDController<Book, Integer, BookInputDTO, BookUpdateDTO> {
 
 	private final BookService service;
