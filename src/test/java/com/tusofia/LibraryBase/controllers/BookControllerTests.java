@@ -29,8 +29,8 @@ public class BookControllerTests {
     private BookService mockBookService;
 
     @Test
-    @DisplayName("Get Should Return List")
-    public void getAllShouldReturnList() throws Exception {
+    @DisplayName("Get Should Return Book")
+    public void getShouldReturnBook() throws Exception {
         int bookId = 1;
         Book book = new Book();
         book.setId(bookId);
