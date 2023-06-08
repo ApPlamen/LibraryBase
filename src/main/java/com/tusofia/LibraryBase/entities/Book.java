@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,9 +23,13 @@ public class Book implements EntityModel {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "id")
 	private int id;
+	@Column(name = "name")
 	private String name;
+	@Column(name = "author")
 	private String author;
+	@Column(name = "published")
 	private Date published;
 	
 	@OneToMany(targetEntity=RentArchive.class, orphanRemoval=true, cascade=CascadeType.ALL)

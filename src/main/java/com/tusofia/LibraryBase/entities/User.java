@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,9 +22,13 @@ public class User implements EntityModel {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "id")
 	private int id;
+	@Column(name = "userName")
 	private String userName;
+	@Column(name = "password")
 	private String password;
+	@Column(name = "active")
 	private boolean active;
 	
 	@OneToMany(targetEntity=RentActive.class, orphanRemoval=true, cascade=CascadeType.ALL)
