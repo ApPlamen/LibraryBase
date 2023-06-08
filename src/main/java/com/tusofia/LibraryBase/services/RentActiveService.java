@@ -16,8 +16,8 @@ import com.tusofia.LibraryBase.infrastructure.RentActiveRepo;
 @Service
 public class RentActiveService extends CRUDService<RentActive, Integer, RentActiveInputDTO, RentActiveUpdateDTO> {
 	
-	private RentArchiveService rentArchiveService;
-	private BookRepo bookRepo;
+	private final RentArchiveService rentArchiveService;
+	private final BookRepo bookRepo;
 
 	@Autowired
 	public RentActiveService(RentActiveRepo repo, BookRepo bookRepo, RentArchiveService rentArchiveService) {

@@ -17,7 +17,7 @@ import com.tusofia.LibraryBase.services.RentActiveService;
 @RequestMapping("api/rent-active")
 public class RentActiveController extends CRUDController<RentActive, Integer, RentActiveInputDTO, RentActiveUpdateDTO> {
 
-	private RentActiveService service;
+	private final RentActiveService service;
 	
 	@Autowired
 	public RentActiveController(RentActiveService service) {

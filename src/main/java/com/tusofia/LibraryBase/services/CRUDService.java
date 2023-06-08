@@ -10,7 +10,7 @@ import com.tusofia.LibraryBase.infrastructure.Repo;
 
 public class CRUDService<Entity extends EntityModel, EntityId, InputDTOImp extends InputDTO<Entity>, UpdateDTOImp extends UpdateDTO<Entity, EntityId>> {
 	
-	protected Repo<Entity, EntityId> repo;
+	protected final Repo<Entity, EntityId> repo;
 	
 	public CRUDService(Repo<Entity, EntityId> repo) {
 		this.repo = repo;
