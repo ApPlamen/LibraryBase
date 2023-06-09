@@ -19,9 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 @WebMvcTest(BookController.class)
 public class BookControllerTests {
@@ -36,7 +37,7 @@ public class BookControllerTests {
 
     @Test
     @DisplayName("Get Should Return Book")
-    public void getShouldReturnBook() throws Exception {
+    void getShouldReturnBook() throws Exception {
         int bookId = 1;
         Book book = new Book();
         book.setId(bookId);
@@ -48,7 +49,7 @@ public class BookControllerTests {
         String bookJson = objectMapper.writeValueAsString(expected.get());
 
         RequestBuilder request = MockMvcRequestBuilders
-                .get("/api/book/get/" + bookId)
+                .get("/api/books/get/" + bookId)
                 .contentType("application/json");
 
         MvcResult result = mockMvc.perform(request)
@@ -59,11 +60,12 @@ public class BookControllerTests {
 
         assertEquals(bookJson, content);
         verify(mockBookService, times(1)).getById(bookId);
+        verifyNoMoreInteractions(mockBookService);
     }
 
     @Test
     @DisplayName("Get All Should Return List Of Books")
-    public void getAllShouldReturnListOfBooks() throws Exception {
+    void getAllShouldReturnListOfBooks() throws Exception {
         Book book1 = new Book();
         book1.setId(1);
         Book book2 = new Book();
@@ -78,7 +80,7 @@ public class BookControllerTests {
         String bookListJson = objectMapper.writeValueAsString(expected);
 
         RequestBuilder request = MockMvcRequestBuilders
-                .get("/api/book/get-all")
+                .get("/api/books/get-all")
                 .contentType("application/json");
 
         MvcResult result = mockMvc.perform(request)
@@ -89,5 +91,6 @@ public class BookControllerTests {
 
         assertEquals(bookListJson, content);
         verify(mockBookService, times(1)).getAll();
+        verifyNoMoreInteractions(mockBookService);
     }
 }
