@@ -37,7 +37,7 @@ public class BookControllerTests {
 
     @Test
     @DisplayName("Get Should Return Book")
-    public void getShouldReturnBook() throws Exception {
+    void getShouldReturnBook() throws Exception {
         int bookId = 1;
         Book book = new Book();
         book.setId(bookId);
@@ -65,7 +65,7 @@ public class BookControllerTests {
 
     @Test
     @DisplayName("Get All Should Return List Of Books")
-    public void getAllShouldReturnListOfBooks() throws Exception {
+    void getAllShouldReturnListOfBooks() throws Exception {
         Book book1 = new Book();
         book1.setId(1);
         Book book2 = new Book();

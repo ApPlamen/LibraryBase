@@ -30,7 +30,7 @@ public class BookServiceTests {
 
     @Test
     @DisplayName("Get By Id Should Return Book")
-    public void getByIdShouldReturnBook(){
+    void getByIdShouldReturnBook(){
         int bookId = 1;
         Book book = new Book();
         book.setId(bookId);
@@ -49,7 +49,7 @@ public class BookServiceTests {
 
     @Test
     @DisplayName("Get All Should Return List Of Books")
-    public void getAllShouldReturnListOfBooks(){
+    void getAllShouldReturnListOfBooks(){
         Book book1 = new Book();
         book1.setId(1);
         Book book2 = new Book();
