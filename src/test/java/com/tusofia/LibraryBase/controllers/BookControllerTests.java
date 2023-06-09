@@ -19,9 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 @WebMvcTest(BookController.class)
 public class BookControllerTests {
@@ -48,7 +49,7 @@ public class BookControllerTests {
         String bookJson = objectMapper.writeValueAsString(expected.get());
 
         RequestBuilder request = MockMvcRequestBuilders
-                .get("/api/book/get/" + bookId)
+                .get("/api/books/get/" + bookId)
                 .contentType("application/json");
 
         MvcResult result = mockMvc.perform(request)
@@ -59,6 +60,7 @@ public class BookControllerTests {
 
         assertEquals(bookJson, content);
         verify(mockBookService, times(1)).getById(bookId);
+        verifyNoMoreInteractions(mockBookService);
     }
 
     @Test
@@ -78,7 +80,7 @@ public class BookControllerTests {
         String bookListJson = objectMapper.writeValueAsString(expected);
 
         RequestBuilder request = MockMvcRequestBuilders
-                .get("/api/book/get-all")
+                .get("/api/books/get-all")
                 .contentType("application/json");
 
         MvcResult result = mockMvc.perform(request)
@@ -89,5 +91,6 @@ public class BookControllerTests {
 
         assertEquals(bookListJson, content);
         verify(mockBookService, times(1)).getAll();
+        verifyNoMoreInteractions(mockBookService);
     }
 }
