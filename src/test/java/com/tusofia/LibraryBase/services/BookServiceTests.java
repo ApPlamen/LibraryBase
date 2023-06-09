@@ -2,7 +2,7 @@ package com.tusofia.LibraryBase.services;
 
 import com.tusofia.LibraryBase.entities.Book;
 import com.tusofia.LibraryBase.infrastructure.BookRepo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
